@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ChatApp</string>
+    <!--Login Screen Main Activity Strings -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signUpText">Create your account</string>
+
+    <!--SignUp Screen SignUp Activity Strings-->
+    <string name="signUp">Sign Up</string>
 </resources>

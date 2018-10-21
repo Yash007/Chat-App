@@ -1,18 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:weightSum="3"
+            android:background="@drawable/header_design"
+            >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_horizontal|center_vertical"
+                android:paddingTop="40dp"
+                android:paddingBottom="0dp"
+                >
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/logo"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    />
+            </TableRow>
+        </TableLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_box_design"
+                    android:layout_weight="1"
+                    android:id="@+id/loginIdEditText"
+                    android:hint="@string/email"
+                    android:textColor="@color/colorPrimaryText"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_box_design"
+                    android:layout_weight="1"
+                    android:id="@+id/loginPasswordEditText"
+                    android:hint="@string/password"
+                    android:textColor="@color/colorPrimaryText"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:gravity="center_horizontal|center_vertical"
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_design"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/login"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="16dp"
+                    android:textStyle="normal"
+                    />
+            </TableRow>
 
-</android.support.constraint.ConstraintLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:gravity="center_horizontal|center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="@string/signUpText"
+                    android:textColor="@color/colorSecondryText"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>
