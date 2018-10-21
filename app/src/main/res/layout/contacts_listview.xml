@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:padding="8dp"
+    >
+
+    <TextView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_dp_design"
+        android:text="YS"
+        android:textSize="24dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@color/colorTextIcons"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="16dp"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:weightSum="1"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="16dp"
+                android:gravity="center_vertical|start"
+                android:text="@string/firstName"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:weightSum="1"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="12dp"
+                android:gravity="center_vertical|start"
+                android:text="@string/email"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="normal"
+                android:layout_weight="1"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
