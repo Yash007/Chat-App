@@ -5,25 +5,28 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-    private TextView signUpText;
+    private Button signUpButton;
+    private Button signUpCancelButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        signUpText = (TextView) findViewById(R.id.loginSignUpText);
+        signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpCancelButton = (Button) findViewById(R.id.signUpCancelButton);
 
-        signUpText.setOnClickListener(new View.OnClickListener() {
+        signUpCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
             }
         });
     }

@@ -8,4 +8,9 @@
 
     <!--SignUp Screen SignUp Activity Strings-->
     <string name="signUp">Sign Up</string>
+    <string name="firstName">First name</string>
+    <string name="lastName">Last name</string>
+    <string name='confirmPassword'>Confirm password</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="cancel">Cancel</string>
 </resources>
