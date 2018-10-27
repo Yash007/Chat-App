@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".ContactsActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".SearchContactsActivity"></activity>
     </application>
 
 </manifest>
