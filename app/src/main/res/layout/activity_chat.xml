@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:weightSum="10"
+    android:orientation="vertical"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="9.7"
+        android:id="@+id/chatScroll"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        >
+
+    </ScrollView>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="1"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:weightSum="10"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            >
+            <EditText
+                android:layout_weight="9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/chat_message_text_design"
+                />
+            <ImageButton
+                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_design"
+                android:layout_marginLeft="8dp"
+
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
