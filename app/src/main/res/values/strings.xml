@@ -13,4 +13,5 @@
     <string name='confirmPassword'>Confirm password</string>
     <string name="phoneNumber">Phone number</string>
     <string name="cancel">Cancel</string>
+
 </resources>
