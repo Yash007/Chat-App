@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private ProgressDialog pDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     sharedPreferences.putString("firstName",profile.getString("uFirstName"));
                     sharedPreferences.putString("lastName",profile.getString("uLastName"));
                     sharedPreferences.putString("mobile",profile.getString("uMobile"));
-
+                    sharedPreferences.putBoolean("keepLogin",true);
                     sharedPreferences.commit();
                     sharedPreferences.apply();
 
