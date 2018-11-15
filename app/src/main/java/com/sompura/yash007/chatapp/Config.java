@@ -22,4 +22,7 @@ public class Config {
     public static String findTotalMessages = webServiceRoot + "chat.php?findTotalMessages=true";
     public static String loadChat = webServiceRoot + "chat.php?loadChat=true";
 
+    //Shared Preference Name
+    public static String prefName = "ChatAppData";
+
 }

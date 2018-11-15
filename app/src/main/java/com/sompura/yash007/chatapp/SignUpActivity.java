@@ -216,7 +216,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             if(status.equals("Success") == true) {
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
             else    {

@@ -71,6 +71,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/text_box_design"
                     android:hint="@string/firstName"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
@@ -91,6 +94,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/text_box_design"
                     android:hint="@string/lastName"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
@@ -111,6 +117,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/text_box_design"
                     android:hint="@string/phoneNumber"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
@@ -131,6 +140,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/text_box_design"
                     android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
@@ -152,6 +164,8 @@
                     android:background="@drawable/text_box_design"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
@@ -173,6 +187,8 @@
                     android:background="@drawable/text_box_design"
                     android:hint="@string/confirmPassword"
                     android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText" />
             </TableRow>
 
