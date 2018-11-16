@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ContactsFragment">
 
-    <LinearLayout
+    <ListView
         android:id="@+id/contactList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    </LinearLayout>
+    </ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addContactsFloatingButton"

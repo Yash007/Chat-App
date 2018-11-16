@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".ContactsActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".SearchContactsActivity" />
         <activity android:name=".DashboardActivity"></activity>
