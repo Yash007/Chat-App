@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     sharedPreferences.putString("firstName",profile.getString("uFirstName"));
                     sharedPreferences.putString("lastName",profile.getString("uLastName"));
                     sharedPreferences.putString("mobile",profile.getString("uMobile"));
+                    sharedPreferences.putString("uId",profile.getString("uId"));
                     sharedPreferences.putBoolean("keepLogin",true);
                     sharedPreferences.commit();
                     sharedPreferences.apply();

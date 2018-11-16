@@ -2,6 +2,8 @@ package com.sompura.yash007.chatapp;
 
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -11,16 +13,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +47,19 @@ public class SearchContactsActivity extends AppCompatActivity {
 
         contactList = new ArrayList<>();
         lv = (ListView) findViewById(R.id.searchContactsResult);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.prefName,MODE_PRIVATE);
+        final String sourceId = sharedPreferences.getString("uId","");
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView destination = (TextView) view.findViewById(R.id.contactIdListView);
+                String destinationId = destination.getText().toString();
+
+                new AddContact(sourceId,destinationId).execute();
+            }
+        });
     }
 
     @Override
@@ -208,5 +230,103 @@ public class SearchContactsActivity extends AppCompatActivity {
             lv.setAdapter(adapter);
         }
 
+    }
+
+    public class AddContact extends AsyncTask<String, Void, String> {
+
+        String sourceId, destinationId;
+        public AddContact(String sourceId, String destinationId)  {
+            this.sourceId = sourceId;
+            this.destinationId = destinationId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(SearchContactsActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... arg0) {
+            try {
+                //URL url = new URL("https://studytutorial.in/post.php");
+                URL url = new URL(Config.addContact);
+
+                JSONObject postDataParams = new JSONObject();
+
+                postDataParams.put("sourceId",sourceId);
+                postDataParams.put("destinationId",destinationId);
+
+                Log.e("params",postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "Application/json;charset=UTF-8");
+                conn.setRequestProperty("Accept","Application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                os.writeBytes(postDataParams.toString());
+
+                os.flush();
+                os.close();
+
+                int responseCode=conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in=new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line="";
+
+                    while((line = in.readLine()) != null) {
+                        Log.e("+++++", "line: "+line);
+                        sb.append(line);
+                        //break;
+                    }
+                    in.close();
+                    return sb.toString();
+                }
+                else {
+                    return new String("false : "+responseCode);
+                }
+            }
+            catch(Exception e) {
+                Log.e("~~~", e.toString());
+                return new String("Exception: " + e.getMessage());
+            }
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("TAG",result);
+            String status = null;
+            String message = null;
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                status = jsonObject.getString("result");
+                message = jsonObject.getString("message");
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            pDialog.dismiss();
+
+            if(status.equals("Success") == true) {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+            else    {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+
+
+        }
     }
 }
