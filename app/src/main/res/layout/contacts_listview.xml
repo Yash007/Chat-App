@@ -7,6 +7,7 @@
     >
 
     <TextView
+        android:id="@+id/shortNameListView"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:background="@drawable/circle_dp_design"
@@ -28,9 +29,12 @@
             >
 
             <TextView
+                android:drawableLeft="@drawable/user"
+                android:drawablePadding="5dp"
+                android:id="@+id/nameListView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:gravity="center_vertical|start"
                 android:text="@string/firstName"
                 android:textColor="@color/colorPrimaryText"
@@ -41,17 +45,37 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="26dp"
-            android:weightSum="1"
             >
             <TextView
-                android:layout_width="match_parent"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="5dp"
+                android:id="@+id/emailListView"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:gravity="center_vertical|start"
                 android:text="@string/email"
                 android:textColor="@color/colorPrimaryText"
                 android:textStyle="normal"
-                android:layout_weight="1"
+                />
+
+            <TextView
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="5dp"
+                android:id="@+id/phoneListView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:gravity="center_vertical|start"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:id="@+id/contactIdListView"
                 />
         </TableRow>
     </TableLayout>
