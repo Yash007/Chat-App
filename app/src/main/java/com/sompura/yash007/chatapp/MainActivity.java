@@ -39,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.prefName,MODE_PRIVATE);
+        Boolean keepLogin = sharedPreferences.getBoolean("keepLogin",false);
+
+        if(keepLogin == true)   {
+            String email = sharedPreferences.getString("id","");
+            String password = sharedPreferences.getString("password","");
+
+            new LoginWeb(email,password).execute();
+        }
+
         signUpText = (TextView) findViewById(R.id.loginSignUpText);
 
         signUpText.setOnClickListener(new View.OnClickListener() {

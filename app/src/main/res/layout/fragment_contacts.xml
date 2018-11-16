@@ -15,9 +15,9 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/send_pic"
+        android:src="@drawable/add"
         android:layout_margin="16dp" />
 </android.support.design.widget.CoordinatorLayout>
