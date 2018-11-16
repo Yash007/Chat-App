@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     sharedPreferences.commit();
                     sharedPreferences.apply();
 
-                    startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+                    startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                 }
                 else    {
                     Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
