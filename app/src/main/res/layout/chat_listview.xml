@@ -7,10 +7,11 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="6dp"
+    android:weightSum="10"
     >
 
     <TextView
-        android:id="@+id/shortNameListView"
+        android:id="@+id/chatShortNameListView"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:background="@drawable/circle_dp_design"
@@ -18,13 +19,14 @@
         android:textSize="24dp"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="@color/colorTextIcons"
+        android:layout_weight="0"
         />
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:paddingLeft="16dp"
-        android:divider="@color/colorDivider"
+        android:layout_weight="9"
         >
         <TableRow
             android:layout_width="match_parent"
@@ -35,7 +37,7 @@
             <TextView
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="5dp"
-                android:id="@+id/nameListView"
+                android:id="@+id/chatNameListView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:textSize="18dp"
@@ -53,8 +55,8 @@
             <TextView
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="5dp"
-                android:id="@+id/emailListView"
-                android:layout_width="wrap_content"
+                android:id="@+id/chatMessageListView"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:textSize="14dp"
                 android:gravity="center_vertical|start"
@@ -64,24 +66,22 @@
                 />
 
             <TextView
-                android:drawableLeft="@drawable/phone"
-                android:drawablePadding="5dp"
-                android:id="@+id/phoneListView"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="14dp"
-                android:gravity="center_vertical|start"
-                android:textColor="@color/colorSecondryText"
-                android:textStyle="normal"
-                android:layout_marginLeft="5dp"
-                />
-
-            <TextView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="invisible"
-                android:id="@+id/contactIdListView"
+                android:id="@+id/chatIdListView"
                 />
         </TableRow>
     </TableLayout>
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="66dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal|end"
+        android:textColor="@color/colorSecondryText"
+        android:textSize="12dp"
+
+        android:id="@+id/chatDateListView"
+        />
 </LinearLayout>

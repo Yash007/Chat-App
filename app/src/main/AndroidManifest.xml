@@ -25,7 +25,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatActivity"
+            android:icon="@drawable/logo"
+            android:parentActivityName=".DashboardActivity"
+            />
         <activity android:name=".SearchContactsActivity" />
         <activity android:name=".DashboardActivity"></activity>
     </application>

@@ -37,16 +37,15 @@
             android:weightSum="10">
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_weight="9.6"
+                android:layout_weight="9"
                 android:background="@drawable/chat_message_text_design" />
 
             <ImageButton
-                android:layout_width="48dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginLeft="8dp"
-                android:layout_weight="0.4"
                 android:src="@drawable/send_pic"
                 android:background="@drawable/send_button_design"
                 />
