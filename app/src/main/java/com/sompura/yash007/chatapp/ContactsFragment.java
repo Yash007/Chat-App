@@ -15,9 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -62,8 +64,31 @@ public class ContactsFragment extends Fragment {
         lv = (ListView) context.findViewById(R.id.contactList);
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(Config.prefName,Context.MODE_PRIVATE);
-        String uId = sharedPreferences.getString("uId","");
+        final String uId = sharedPreferences.getString("uId","");
         new ListContacts(uId).execute();
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView receiverId = (TextView) view.findViewById(R.id.contactIdListView);
+                TextView receiverName = (TextView) view.findViewById(R.id.nameListView);
+                TextView receiverShortName = (TextView) view.findViewById(R.id.shortNameListView);
+
+                String rId, name, shortName;
+                rId = receiverId.getText().toString();
+                name = receiverName.getText().toString();
+                shortName = receiverShortName.getText().toString();
+
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("sId",uId);
+                intent.putExtra("rId",rId);
+                intent.putExtra("name",name);
+                intent.putExtra("shortName",shortName);
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     private class ListContacts extends AsyncTask<Void, Void, Void> {

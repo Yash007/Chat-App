@@ -14,7 +14,7 @@
         android:id="@+id/chatScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="9"
+        android:layout_weight="10"
         android:baselineAligned="false"
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
@@ -29,10 +29,10 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_vertical"
+        android:layout_height="70dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="bottom"
         android:weightSum="1">
 
         <TableRow
