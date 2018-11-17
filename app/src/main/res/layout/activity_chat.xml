@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:background="@color/colorTextIcons"
+    >
 
-    <ScrollView
+    <ListView
         android:id="@+id/chatScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,9 +19,12 @@
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
         android:paddingRight="16dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:divider="@color/colorTextIcons"
+        android:dividerHeight="10dp"
+        >
+    </ListView>
 
-    </ScrollView>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -31,18 +36,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
             android:gravity="center_vertical|center_horizontal"
-            android:weightSum="10">
+            android:weightSum="10"
+            android:focusable="true" android:focusableInTouchMode="true"
+            >
 
             <EditText
+                android:id="@+id/sendMessageEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:paddingLeft="25dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:maxLines="10"
+                android:minHeight="48dp"
+                android:inputType="textCapSentences"
+                android:hint="@string/typeMessage"
                 android:background="@drawable/chat_message_text_design" />
 
             <ImageButton
+                android:id="@+id/sendMessageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginLeft="8dp"
