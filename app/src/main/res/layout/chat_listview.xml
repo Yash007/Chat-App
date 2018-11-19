@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="64dp"
     android:paddingTop="8dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
@@ -12,11 +12,11 @@
 
     <TextView
         android:id="@+id/chatShortNameListView"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/circle_dp_design"
         android:text="YS"
-        android:textSize="24dp"
+        android:textSize="20dp"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="@color/colorTextIcons"
         android:layout_weight="0"
@@ -30,7 +30,7 @@
         >
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:weightSum="1"
             >
 
@@ -39,25 +39,25 @@
                 android:drawablePadding="5dp"
                 android:id="@+id/chatNameListView"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="26dp"
                 android:textSize="18dp"
                 android:gravity="center_vertical|start"
                 android:text="@string/firstName"
                 android:textColor="@color/colorPrimaryText"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="26dp"
+            android:layout_height="22dp"
             >
             <TextView
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="5dp"
                 android:id="@+id/chatMessageListView"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="22dp"
                 android:textSize="14dp"
                 android:gravity="center_vertical|start"
                 android:text="@string/email"

@@ -16,4 +16,5 @@
 
     <string name="search">Search</string>
     <string name="typeMessage">Type your message</string>
+    <string name="signOut">Sign out</string>
 </resources>
