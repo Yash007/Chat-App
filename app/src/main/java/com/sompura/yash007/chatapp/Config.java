@@ -25,4 +25,7 @@ public class Config {
     //Shared Preference Name
     public static String prefName = "ChatAppData";
 
+
+    //Encryption and Decryption Key
+    public static String AesKey = "CentChatsAppYSVN";
 }

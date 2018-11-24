@@ -16,8 +16,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES
 {
-
-
     private static SecretKeySpec secretKey ;
     private static byte[] key ;
 
@@ -31,20 +29,18 @@ public class AES
         MessageDigest sha = null;
         try {
             key = myKey.getBytes("UTF-8");
-            System.out.println(key.length);
+            //System.out.println(key.length);
             sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
             key = Arrays.copyOf(key, 16); // use only first 128 bit
-            System.out.println(key.length);
-            System.out.println(new String(key,"UTF-8"));
+            //System.out.println(key.length);
+            //System.out.println(new String(key,"UTF-8"));
             secretKey = new SecretKeySpec(key, "AES");
 
 
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -106,24 +102,24 @@ public class AES
     }
 
 
-    public static void main(String args[])
-    {
-
-        final String strToEncrypt = "My text to encrypt";
-        final String strPssword = "encryptor key";
-        AES.setKey(strPssword);
-
-        AES.encrypt(strToEncrypt.trim());
-
-        System.out.println("String to Encrypt: " + strToEncrypt);
-        System.out.println("Encrypted: " + AES.getEncryptedString());
-
-        final String strToDecrypt =  AES.getEncryptedString();
-        AES.decrypt(strToDecrypt.trim());
-
-        System.out.println("String To Decrypt : " + strToDecrypt);
-        System.out.println("Decrypted : " + AES.getDecryptedString());
-
-    }
+//    public static void main(String args[])
+//    {
+//
+//        final String strToEncrypt = "My text to encrypt";
+//        final String strPssword = Config.AesKey;
+//        AES.setKey(strPssword);
+//
+//        AES.encrypt(strToEncrypt.trim());
+//
+//        System.out.println("String to Encrypt: " + strToEncrypt);
+//        System.out.println("Encrypted: " + AES.getEncryptedString());
+//
+//        final String strToDecrypt =  AES.getEncryptedString();
+//        AES.decrypt(strToDecrypt.trim());
+//
+//        System.out.println("String To Decrypt : " + strToDecrypt);
+//        System.out.println("Decrypted : " + AES.getDecryptedString());
+//
+//    }
 
 }
