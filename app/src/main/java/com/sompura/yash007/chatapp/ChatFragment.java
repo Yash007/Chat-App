@@ -122,8 +122,14 @@ public class ChatFragment extends Fragment {
                         String date = c.getString("date");
                         String time = c.getString("time");
                         String shortName = c.getString("shortName");
-                        AES.decrypt(message);
-                        message = AES.getDecryptedString();
+                        String sensLevel = c.getString("sensLevel");
+                        if(Integer.parseInt(sensLevel) == 1)  {
+                            message = "Confidential message!! Tap to view";
+                        }
+                        else    {
+                            AES.decrypt(message);
+                            message = AES.getDecryptedString();
+                        }
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 

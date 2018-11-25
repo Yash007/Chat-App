@@ -129,8 +129,13 @@ public class ChatActivity extends AppCompatActivity {
                         String senId = c.getString("senderId");
                         String shortName = c.getString("shortName");
 
-                        AES.decrypt(message);
-                        message = AES.getDecryptedString();
+                        if(Integer.parseInt(sensLevel) == 1 && senId.equals(sId) == false)  {
+                            message = "Confidential message!! Tap to view";
+                        }
+                        else    {
+                            AES.decrypt(message);
+                            message = AES.getDecryptedString();
+                        }
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 
