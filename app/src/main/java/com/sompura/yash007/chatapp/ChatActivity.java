@@ -3,6 +3,7 @@ package com.sompura.yash007.chatapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -70,6 +73,18 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new LoadChat(sId,rId).execute();
+                handler.postDelayed(this,10000);
+            }
+        };
+
+        handler.postDelayed(runnable, 10000);
+
 
 
     }
