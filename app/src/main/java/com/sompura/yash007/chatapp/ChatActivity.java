@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -84,6 +85,20 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         handler.postDelayed(runnable, 10000);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView sensLevel = (TextView) view.findViewById(R.id.sensLevelChatListView);
+                String level = sensLevel.getText().toString();
+                TextView senderId = (TextView) view.findViewById(R.id.senIdChatListView);
+
+                if(Integer.parseInt(level) == 1 && senderId.getText().toString().equals(sId) == false)    {
+                    //Dialog code here
+                    Toast.makeText(getApplicationContext(),"Message Clicked",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private class LoadChat extends AsyncTask<Void, Void, Void> {
