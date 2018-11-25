@@ -84,9 +84,6 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         handler.postDelayed(runnable, 10000);
-
-
-
     }
 
     private class LoadChat extends AsyncTask<Void, Void, Void> {
@@ -100,10 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(ChatActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+
 
         }
         @Override
@@ -123,6 +117,7 @@ public class ChatActivity extends AppCompatActivity {
                     // Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("chat");
                     contactList.clear();
+                    AES.setKey();
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
@@ -134,7 +129,8 @@ public class ChatActivity extends AppCompatActivity {
                         String senId = c.getString("senderId");
                         String shortName = c.getString("shortName");
 
-
+                        AES.decrypt(message);
+                        message = AES.getDecryptedString();
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 
@@ -185,8 +181,7 @@ public class ChatActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+
             /**
              * Updating parsed JSON data into ListView
              * */
@@ -223,6 +218,10 @@ public class ChatActivity extends AppCompatActivity {
             try {
                 //URL url = new URL("https://studytutorial.in/post.php");
                 URL url = new URL(Config.sendChat);
+
+                AES.setKey();
+                AES.encrypt(message);
+                message = AES.getEncryptedString();
 
                 JSONObject postDataParams = new JSONObject();
 
@@ -288,7 +287,6 @@ public class ChatActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            pDialog.dismiss();
 
             if(status.equals("Success") == true) {
                 //Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();

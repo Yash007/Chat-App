@@ -111,7 +111,7 @@ public class ChatFragment extends Fragment {
 
                     // Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("chat");
-
+                    AES.setKey();
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
@@ -122,7 +122,8 @@ public class ChatFragment extends Fragment {
                         String date = c.getString("date");
                         String time = c.getString("time");
                         String shortName = c.getString("shortName");
-
+                        AES.decrypt(message);
+                        message = AES.getDecryptedString();
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 

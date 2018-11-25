@@ -1,8 +1,9 @@
 package com.sompura.yash007.chatapp;
 
 
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 
+import android.util.Base64;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,9 +24,8 @@ public class AES
     private static String encryptedString;
 
 
-    public static void setKey(String myKey){
-
-
+    public static void setKey()   {
+        String myKey = Config.AesKey;
         MessageDigest sha = null;
         try {
             key = myKey.getBytes("UTF-8");
@@ -69,8 +69,8 @@ public class AES
 
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-
-            setEncryptedString(Base64.encodeBase64String(cipher.doFinal(strToEncrypt.getBytes("UTF-8"))));
+            setEncryptedString(Base64.encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")),Base64.DEFAULT));
+            //setEncryptedString(Base64.encodeBase64String(cipher.doFinal(strToEncrypt.getBytes("UTF-8"))));
 
         }
         catch (Exception e)
@@ -89,7 +89,8 @@ public class AES
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
 
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            setDecryptedString(new String(cipher.doFinal(Base64.decodeBase64(strToDecrypt))));
+            setDecryptedString(new String(cipher.doFinal(Base64.decode(strToDecrypt,Base64.DEFAULT))));
+            //setDecryptedString(new String(cipher.doFinal(Base64.decodeBase64(strToDecrypt))));
 
         }
         catch (Exception e)
@@ -107,7 +108,7 @@ public class AES
 //
 //        final String strToEncrypt = "My text to encrypt";
 //        final String strPssword = Config.AesKey;
-//        AES.setKey(strPssword);
+//        AES.setKey();
 //
 //        AES.encrypt(strToEncrypt.trim());
 //
