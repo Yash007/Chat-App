@@ -221,13 +221,16 @@ public class ChatActivity extends AppCompatActivity {
 
                 AES.setKey();
                 AES.encrypt(message);
+                SensitiveLevel  sensitiveLevel = new SensitiveLevel(message.toLowerCase());
                 message = AES.getEncryptedString();
+                int level = sensitiveLevel.findSensitiveLevel();
 
                 JSONObject postDataParams = new JSONObject();
 
                 postDataParams.put("message",message);
                 postDataParams.put("senderId",senderId);
                 postDataParams.put("receiverId",receiverId);
+                postDataParams.put("sensLevel",level);
 
                 Log.e("params",postDataParams.toString());
 
