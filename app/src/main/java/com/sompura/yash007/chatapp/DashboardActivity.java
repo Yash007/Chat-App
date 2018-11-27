@@ -59,6 +59,9 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.fingerprint:
+                startActivity(new Intent(getApplicationContext(),FingerprintActivity.class));
+                return true;
             case R.id.signOut:
                 sharedPreferences.putBoolean("keepLogin",false);
                 sharedPreferences.commit();

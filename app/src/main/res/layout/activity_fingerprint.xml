@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
+    android:background="@color/colorBackground"
+    tools:context=".FingerprintActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/fingerprintTitle"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimaryText"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_fp_40px"
+        android:id="@+id/imageView"
+        android:contentDescription="@string/fingerprint"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fingerprintStatus"
+        android:gravity="center"
+        android:padding="25dp"
+        android:textSize="16sp"
+        android:text="@string/instructions"
+        android:textColor="@color/colorSecondryText"
+        />
+</LinearLayout>

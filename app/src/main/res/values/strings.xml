@@ -17,4 +17,11 @@
     <string name="search">Search</string>
     <string name="typeMessage">Type your message</string>
     <string name="signOut">Sign out</string>
+    <string name="fingerprint">Fingerprint Settings</string>
+    <string name="fingerprintTitle">Fingerprint Authentication</string>
+    <string name="instructions">Place your fingerprint on the Home button to verify your identity</string>
+    <string name="searchContactActivity">Search Contacts</string>
+    <string name="dashboardActivity">ChatApp</string>
+    <string name="fingerprintActivity">Fingerprint</string>
+    <string name="fingerprintDefaultStatus">You have not assigned fingerprint to ChatApp. Please touch your fingerprint sensor for assign fingerprint to ChatApp.</string>
 </resources>
