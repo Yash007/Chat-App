@@ -3,6 +3,7 @@ package com.sompura.yash007.chatapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.os.CancellationSignal;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -66,6 +68,13 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     }
 
     public void onAuthSuccess() {
-        Toast.makeText(appContext,"FingerprintAssigned",Toast.LENGTH_LONG).show();
+        SharedPreferences.Editor sharedPreference = appContext.getSharedPreferences(Config.prefName,appContext.MODE_PRIVATE).edit();
+        sharedPreference.putString("uFingerPrintStatus","assigned");
+        sharedPreference.commit();
+        sharedPreference.apply();
+        Toast.makeText(appContext,"Fingerprint Assigned",Toast.LENGTH_LONG).show();
+        appContext.startActivity(new Intent(appContext,DashboardActivity.class));
     }
+
+
 }

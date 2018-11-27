@@ -24,4 +24,10 @@
     <string name="dashboardActivity">ChatApp</string>
     <string name="fingerprintActivity">Fingerprint</string>
     <string name="fingerprintDefaultStatus">You have not assigned fingerprint to ChatApp. Please touch your fingerprint sensor for assign fingerprint to ChatApp.</string>
+    <string name="fingerprintUnlock">Fingerprint</string>
+    <string name="fingerprintDetails">Confirm fingerprint to continue.</string>
+    <string name="touchSensor">Touch Sensor</string>
+    <string name="close">Close</string>
+
+    <string name="message">Message</string>
 </resources>

@@ -1,9 +1,18 @@
 package com.sompura.yash007.chatapp;
 
+import android.annotation.TargetApi;
+import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.KeyProperties;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +21,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,13 +37,27 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -44,7 +68,16 @@ public class ChatActivity extends AppCompatActivity {
     private static final String TAG = "SearchContactsActivity";
     private ImageButton sendButton;
     private EditText message;
+    private static final String KEY_NAME = "chatAppKey";
+    private FingerprintManager fingerprintManager;
+    private KeyguardManager keyguardManager;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private KeyStore keyStore;
+    private KeyGenerator keyGenerator;
+    private Cipher cipher;
+    private FingerprintManager.CryptoObject cryptoObject;
 
+    public Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,15 +120,41 @@ public class ChatActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 10000);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView sensLevel = (TextView) view.findViewById(R.id.sensLevelChatListView);
                 String level = sensLevel.getText().toString();
                 TextView senderId = (TextView) view.findViewById(R.id.senIdChatListView);
+                TextView mId = (TextView) view.findViewById(R.id.mId);
 
                 if(Integer.parseInt(level) == 1 && senderId.getText().toString().equals(sId) == false)    {
                     //Dialog code here
-                    Toast.makeText(getApplicationContext(),"Message Clicked",Toast.LENGTH_LONG).show();
+                    dialog = new Dialog(ChatActivity.this);
+                    dialog.setContentView(R.layout.dialog_fingerprint);
+                    dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                    dialog.show();
+
+                    Button logout = dialog.findViewById(R.id.dialogFingerPrintLogout);
+                    logout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+                    fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+
+                    generateKey();
+
+                    if (cipherInit()) {
+                        cryptoObject = new FingerprintManager.CryptoObject(cipher);
+                        FingerprintLoginHandler helper = new FingerprintLoginHandler(ChatActivity.this, dialog, mId.getText().toString());
+
+                        helper.startAuth(fingerprintManager, cryptoObject);
+
+                    }
                 }
             }
         });
@@ -143,6 +202,7 @@ public class ChatActivity extends AppCompatActivity {
                         String sensLevel = c.getString("sensLevel");
                         String senId = c.getString("senderId");
                         String shortName = c.getString("shortName");
+                        String mId = c.getString("mId");
 
                         if(Integer.parseInt(sensLevel) == 1 && senId.equals(sId) == false)  {
                             message = "Confidential message!! Tap to view";
@@ -161,6 +221,7 @@ public class ChatActivity extends AppCompatActivity {
                         contact.put("sensLevel",sensLevel);
                         contact.put("senId",senId);
                         contact.put("shortName",shortName);
+                        contact.put("mId",mId);
 
                         // adding contact to contact list
 
@@ -207,9 +268,9 @@ public class ChatActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     ChatActivity.this, contactList,
-                    R.layout.chat_bubble, new String[]{"message","time", "sensLevel","senId","shortName"},
+                    R.layout.chat_bubble, new String[]{"message","time", "sensLevel","senId","shortName","mId"},
                     new int[]{R.id.messageChatListView,R.id.timeChatListView,
-                            R.id.sensLevelChatListView,R.id.senIdChatListView,R.id.shortNameChatListView});
+                            R.id.sensLevelChatListView,R.id.senIdChatListView,R.id.shortNameChatListView,R.id.mId});
 
             lv.setAdapter(adapter);
         }
@@ -320,6 +381,69 @@ public class ChatActivity extends AppCompatActivity {
             }
 
 
+        }
+    }
+
+    //Fingerprint METHODS WILL BE HERE
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    protected  void generateKey()   {
+        try {
+            keyStore = KeyStore.getInstance("AndroidKeyStore");
+        }
+        catch (Exception e) {
+            Log.d("Sporites",e.toString());
+        }
+
+        try {
+            keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
+        }
+        catch (NoSuchAlgorithmException |
+                NoSuchProviderException e) {
+            Log.d("Sporties",e.toString());
+        }
+
+        try {
+            keyStore.load(null);
+            keyGenerator.init(new KeyGenParameterSpec.Builder(KEY_NAME,
+                    KeyProperties.PURPOSE_ENCRYPT |
+                            KeyProperties.PURPOSE_DECRYPT)
+                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                    .setUserAuthenticationRequired(true)
+                    .setEncryptionPaddings(
+                            KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                    .build());
+            keyGenerator.generateKey();
+        } catch (NoSuchAlgorithmException |
+                InvalidAlgorithmParameterException
+                | CertificateException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public boolean cipherInit() {
+        try {
+            cipher = Cipher.getInstance(
+                    KeyProperties.KEY_ALGORITHM_AES + "/"
+                            + KeyProperties.BLOCK_MODE_CBC + "/"
+                            + KeyProperties.ENCRYPTION_PADDING_PKCS7);
+        } catch (NoSuchAlgorithmException |
+                NoSuchPaddingException e) {
+            throw new RuntimeException("Failed to get Cipher", e);
+        }
+
+        try {
+            keyStore.load(null);
+            SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
+                    null);
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            return true;
+        } catch (KeyPermanentlyInvalidatedException e) {
+            return false;
+        } catch (KeyStoreException | CertificateException
+                | UnrecoverableKeyException | IOException
+                | NoSuchAlgorithmException | InvalidKeyException e) {
+            throw new RuntimeException("Failed to init Cipher", e);
         }
     }
 }

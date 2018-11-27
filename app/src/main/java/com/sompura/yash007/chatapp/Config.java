@@ -21,6 +21,7 @@ public class Config {
     public static String receiveChat = webServiceRoot + "chat.php?receiveChat=true";
     public static String findTotalMessages = webServiceRoot + "chat.php?findTotalMessages=true";
     public static String loadChat = webServiceRoot + "chat.php?loadChat=true";
+    public static String getMessage = webServiceRoot + "chat.php?getMessage=true";
 
     //Shared Preference Name
     public static String prefName = "ChatAppData";
